@@ -1,0 +1,138 @@
+<html>
+<head>
+<title> Breakout Brick Game </title>
+<style type ="text/css">
+canvas{
+border : 1px solid;
+margin : 0 auto;
+width : 800px;
+display : block;
+margin-top : 50px;
+background-color : #E8F5E9;
+}
+</stye>
+</head>
+<body>
+<canvas id="gameCanvas" height="600px" width="800px"/>
+
+<script type="text/javascript">
+var canvas = document.getElementById("gameCanvas");
+var ctx = canvas.getContext("2d");
+var ballR = 10, x = canvas.width / 2, y = canvas.height - 30,
+dx = 3, dy = -3, pongH = 15, pongW =  80, pongX = (canvas.width - pongW) / 2,
+brickW = 75, brickH = 20, brickPadding = 30, brickOffsetTop = 30,
+brickOffsetLeft = 30;
+
+var bricks = [];
+for(c = 0; c < brickCol; c++) {
+for(r = 0; r < brickRows; r++) {
+bricks.push{
+x : (c * (brickW + brickPadding)) + brickOffsetLeft,
+y : (r * (brickH + brickPadding)) + brickOffsetTop,
+status : 1
+
+});
+}
+}
+
+function drawBall() {
+ctx.beginPath();
+ctx.arc(x, y, ballR, 0, Math.PI * 2);
+ctx.fillStyle = "00C853";
+ctx.fill();
+ctx.closePath();
+}
+function drawPong() {
+ctx.beginPath();
+ctx.rect(pongX, canvas.height - pongH,pongW,pongH);
+ctx.fillStyle = "1B5E20";
+ctx.fill();
+ctx.closePath();
+}
+
+function drawBricks() {
+bricks.forEach(function(brick) {
+if (!brick.status) return;
+
+ctx.beginPath();
+ctx.rect(brick.status) return;
+
+ctx.beginPath();
+ctx.rect(brick.x, brick.y, brickW, bricksH);
+ctx.fillStyle = "#1B5E20";
+ctx.fill();
+ctx.closePath();
+
+});
+}
+function collisoionDetction() {
+bricks.forEach(function(b)) {
+if(!b.status) return;
+
+var inBricksColum = x>b.x  && x < b.x + brickW,
+inbricksRow = y > b.y && y < b.y + brickH;
+
+if (inBricksColumn && inbricksRow){
+dy = -dy;
+b.statuts = 0;
+
+}
+});
+
+function draw() {
+ctx.clearRect(0, 0, canvas.width, canvas.height);
+drawBricks();
+drawBall();
+drawPong();
+collisoionDetction();
+
+if(hitSideWall())
+dx = -dx;
+
+if(hitTop() || hitPong())
+dy = -dy;
+
+if(gameOver())
+document.location.reload();
+
+var Right_Arrow = 39, LEFT_Arrow = 37;
+function hitPong() { return hitBottom() && ballOverPong(); }
+function ballOverPong() { return  x > pongX && x < pongX + pongW;}
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+}
+
+
+
+}
+
+
+
+
+
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+}
